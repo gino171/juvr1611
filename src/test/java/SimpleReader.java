@@ -18,7 +18,7 @@ public class SimpleReader {
 		UVR1611Connection conn = new UVR1611Connection(url, port);
 		UVRCurrentDataReader reader = new UVRCurrentDataReader(conn);
 		res = reader.getCurrentData();
-		UVRDataSetWriter writer = new UVRDataSetWriter(res);
+		UVRDataSetWriter writer = new UVRDataSetWriter(res, prop);
 		System.out.println(writer);
 		conn.close();
 		
