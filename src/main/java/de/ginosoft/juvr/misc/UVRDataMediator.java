@@ -1,4 +1,4 @@
-package de.ginosoft.juvr.data;
+package de.ginosoft.juvr.misc;
 
 import java.util.Date;
 
@@ -6,6 +6,9 @@ import de.ginosoft.energy.data.DataPoint;
 import de.ginosoft.energy.data.DataProvider;
 import de.ginosoft.energy.data.MeasureDescription;
 import de.ginosoft.energy.data.MeasureList;
+import de.ginosoft.juvr.data.UVRDataSet;
+import de.ginosoft.juvr.data.UVRMeasureDescription;
+import de.ginosoft.juvr.data.UVRMeasureList;
 
 /**
  * Wrapper providing the current values for the UVR1611

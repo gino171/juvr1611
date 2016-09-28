@@ -3,6 +3,11 @@ package de.ginosoft.juvr.read;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * reads the version of the UVR device 
+ * @author gino171
+ *
+ */
 public class UVRVersionReader extends AbstractReader{
 	
 	private static char UVR_VERSION = 0x81;

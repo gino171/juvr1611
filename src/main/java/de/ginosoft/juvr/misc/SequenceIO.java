@@ -1,7 +1,12 @@
-package de.ginosoft.energy.data;
+package de.ginosoft.juvr.misc;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import de.ginosoft.energy.data.DataPoint;
+import de.ginosoft.energy.data.DataSequence;
+import de.ginosoft.energy.data.DataUnit;
+import de.ginosoft.energy.data.MeasureDescription;
 
 
 public class SequenceIO {

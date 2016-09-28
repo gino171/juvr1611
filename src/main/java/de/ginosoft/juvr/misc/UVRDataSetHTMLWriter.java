@@ -1,16 +1,16 @@
-package de.ginosoft.juvr.data;
+package de.ginosoft.juvr.misc;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import de.ginosoft.energy.data.DataUnit;
-import de.ginosoft.juvr.misc.HeatingProperty;
+import de.ginosoft.juvr.data.UVRDataSet;
 
-public class UVRDataSetWriter {
+public class UVRDataSetHTMLWriter {
 	
 	private UVRDataSet uvrDataSet;
 
-	public UVRDataSetWriter(UVRDataSet dataset) {
+	public UVRDataSetHTMLWriter(UVRDataSet dataset) {
 		uvrDataSet=dataset;
 	}
 	
@@ -19,30 +19,41 @@ public class UVRDataSetWriter {
 		HeatingProperty prop = null;
 		try { 
 			prop = new HeatingProperty();
-			String ret=prop.getProperty("HEADER","");
+			String ret="<html><head>	<title>Heating</title><link href='tbl.css' rel='stylesheet' type='text/css'></head>"
+					+"<body><h2>Online heating monitoring</h2>"
+					+"<h3>Description:</h3>"
+					+"In 2008 a new wood-based heating from <a href='http://www.solvis.de' target='_blank'>Solvis</a> was installed at home which is controlled by a device that allows logging and analysis of sensors (temperature) and actors of the central heating system."
+					+"<h3>Heating control online:</h3>"
+					+"Here you see the current status of my heating system from "; 
 			String dateformat = prop.getProperty("DATEFORMAT", "dd.MM.yyyy HH:mm:ss");
 			SimpleDateFormat df = new SimpleDateFormat(dateformat);
-			ret+="Date = "+(df.format(uvrDataSet.getDate()))+"\n";
+			ret+=(df.format(uvrDataSet.getDate()))+"\n";
 			
+			ret+="</br>";
+			ret+="<div ><table>";
 			for (int i=0; i<16; i++) {
 				String sensName= prop.getProperty("SENSOR_"+(i+1), "Sensor_"+(i+1));
 				if (!sensName.equals("HIDE")) {
-					ret+=sensName+" = "+ uvrDataSet.getInput(i)+" ["+uvrDataSet.getInputUnit(i).getUnit()+"]\n";
+					ret+="<tr><td>"+sensName+"</td><td>"+ uvrDataSet.getInput(i)+"</td><td>C</td></tr>\n";
 				}
 			}
+			ret+="</table></div>";
 			
 			String sOn = prop.getProperty("ACTOR_ON","ON");
 			String sOff = prop.getProperty("ACTOR_OFF","OFF");
+			ret+="<div ><table>";
 			for (int i=0; i<16; i++) {
 				String actName= prop.getProperty("ACTOR_"+(i+1), "Actor_"+(i+1));
 				if (!actName.equals("HIDE")) {
 					if (uvrDataSet.getOutput(i)) {
-						ret+=actName+" = "+sOn+"\n";
+						ret+="<tr><td>"+actName+"</td><td>"+sOn+"</td></tr>\n";
 					} else {
-						ret+=actName+" = "+sOff+"\n";
+						ret+="<tr><td>"+actName+"</td><td>"+sOff+"</td></tr>\n";
 					}
 				}
 			}
+			ret+="</table></div>";
+			
 			String rName = prop.getProperty("ROT_A1", "Rotation_A1");
 			if ((uvrDataSet.getTurn_A1()>0) && (!rName.equals("HIDE")))  ret+=rName+" = "+uvrDataSet.getTurn_A1()+"\n";
 			
@@ -63,8 +74,9 @@ public class UVRDataSetWriter {
 			if ((uvrDataSet.isHasPower2()) && (!rName.equals("HIDE"))) ret+=rName +" = "+uvrDataSet.getPower2() +" [kW]\n";
 			rName = prop.getProperty("POWER_2_EARN", "power_2_earnings");
 			if ((uvrDataSet.isHasPower2()) && (!rName.equals("HIDE"))) ret+=rName +" = "+uvrDataSet.getMwz2() + " [kWh]\n";
-			
-			ret+=prop.getProperty("FOOTER","");
+		
+			ret+="</body></html>";
+			//ret+=prop.getProperty("FOOTER","");
 			return ret;
 		}
 		catch (IOException e) {
