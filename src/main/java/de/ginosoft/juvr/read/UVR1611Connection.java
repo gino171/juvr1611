@@ -10,8 +10,8 @@ import java.io.IOException;
  */
 public class UVR1611Connection extends UVRConnection{
 	
-	public UVR1611Connection() throws IOException{
-		super();
+	public UVR1611Connection(String url, int port) throws IOException{
+		super(url, port);
 		UVRVersionReader vr = new UVRVersionReader(this);
 		vr.doCommand();
 		if (vr.getVersion()!=UVRVersionReader.UVR_1611) {

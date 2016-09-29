@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * A data container stores several sequences of measurements
- * @author y1603
+ * @author gino171
  *
  */
 public class DataContainer {

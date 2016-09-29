@@ -5,8 +5,8 @@ import java.io.IOException;
 import de.ginosoft.juvr.data.UVRDataSet;
 
 /**
- * Reads current data from UVR host
- * @author Tobias Blickle
+ * Reads current data from UVR host and returns is when calling getCurrentData()
+ * @author gino171
  *
  */
 public class UVRCurrentDataReader extends AbstractReader {
@@ -19,6 +19,11 @@ public class UVRCurrentDataReader extends AbstractReader {
 	}
 	
 	
+	/**
+	 * Retrieve the current data
+	 * @return Data set with current status / values of the UVR device
+	 * @throws IOException
+	 */
 	public UVRDataSet getCurrentData() throws IOException {
 		doCommand();
 		return m_res.getDataSet();
@@ -31,7 +36,6 @@ public class UVRCurrentDataReader extends AbstractReader {
 		byte first= (byte)m_conn.getInputStream().read();
 		if (first==-128) {
 			ans = m_conn.readBlock(56);
-			//int len= m_conn.getInputStream().read(ans, 0, 56);
 			m_res = new CurrentDataSetDecoder(ans);
 		}
 	}

@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 /**
- * One Datapoint
+ * One Datapoint, a value measures at a certain time
  * @author Tobias
  *
  */

@@ -1,4 +1,4 @@
-package de.ginosoft.juvr.data;
+package de.ginosoft.juvr.misc;
 
 import java.util.Iterator;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import de.ginosoft.energy.data.DataContainer;
 import de.ginosoft.energy.data.DataSequence;
 import de.ginosoft.energy.data.MeasureDescription;
+import de.ginosoft.juvr.data.UVRDataSet;
+import de.ginosoft.juvr.data.UVRMeasureList;
 
 /**
  * Transforms a list of UVRDataSets into BDataContainer object
